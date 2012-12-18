@@ -30,12 +30,13 @@ class VariantPage(Page):
             "expiry": 0
         }
         self.driver.add_cookie(cookie)
-        all_cookies = self.driver.get_cookies()
-        #import json
-        #print json.dumps(all_cookies)
-        for cookie_name in all_cookies:
-            print cookie_name
-        sys.exit()
+        #all_cookies = self.driver.get_cookies()
+        #for cookie_name in all_cookies:
+        #    print cookie_name
+        #sys.exit()
+
+    def set_google_referrer(self):
+        pass        
 
     def accept_alert(self):
         try:
