@@ -8,7 +8,8 @@ from saunter.ConfigWrapper import ConfigWrapper as cfg_wrapper
 
 locators = {
     'search box': 'name=q',
-    'search btn': 'name=btnK'
+    'search btn': 'name=btnK',
+    'result set': 'css=#rso li.g:nth-child(N) a.l'
 }
 
 
@@ -17,7 +18,6 @@ class GooglePage(Page):
     PO for the Google page
     """
     def __init__(self, driver):
-        self.locators = locators
         self.driver = driver
         self.config = cfg_wrapper().config
 
@@ -28,5 +28,12 @@ class GooglePage(Page):
         self.driver.find_element_by_locator(
             locators['search box']).send_keys(query)
 
-    def click_result_title(self, title):
-        self.driver.find_element_by_locator('link=%s' % title).click()
+    def click_result(self, index):
+        self.driver.find_element_by_locator(
+            locators['result set'].replace('N', str(index))).click()
+        #self.wait_for_jquery_active()
+
+    def redirect(self, url):
+        u = "http://www.google.com/url?rct=j&q=this&url={0}".format(url)
+        self.driver.get(u)
+        self.driver.find_element_by_link_text(url).click()

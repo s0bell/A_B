@@ -18,5 +18,5 @@ class SiteSpectPage(Page):
         self.config = cfg_wrapper().config
 
     def open_default_url(self):
-        self.driver.get("http://sitespect.walmart.com")
+        self.driver.get("https://sitespect.walmart.com")
         time.sleep(6)
